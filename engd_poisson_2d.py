@@ -32,7 +32,7 @@ eval_integrator = DeterministicIntegrator(interior, 200)
 
 # model
 activation = lambda x : jnp.tanh(x)
-layer_sizes = [2, 32, 1]
+layer_sizes = [2, 32, 32, 32, 1]
 params = init_params(layer_sizes, random.PRNGKey(seed))
 model = mlp(activation)
 v_model = vmap(model, (None, 0))
