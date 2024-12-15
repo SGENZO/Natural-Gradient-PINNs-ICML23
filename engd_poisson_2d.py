@@ -35,6 +35,7 @@ activation = lambda x : jnp.tanh(x)
 layer_sizes = [2, 32, 32, 32, 1]
 params = init_params(layer_sizes, random.PRNGKey(seed))
 model = mlp(activation)
+# model(params, x) 对数据维度进行 vmap
 v_model = vmap(model, (None, 0))
 
 # solution

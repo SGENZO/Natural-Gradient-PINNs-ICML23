@@ -107,11 +107,13 @@ class Square(Hyperrectangle):
         N: int
             N is the number of integration points in [0,1] meaning
             that in [0,1]^2 there are N^2 integration points.
-        
+        N 是一维的单位密度
+
         """
         squareList = []
         a = self._a
         M = max(math.ceil(a) * N, 2)
+        # 因为 range(1,1) 里没有元素，所以 M 至少为 2
         for i in range(1, M-1):
             x = a/(M - 1) * i
             for j in range(1,M-1):
@@ -121,7 +123,7 @@ class Square(Hyperrectangle):
         if not squareList:
             raise Exception("Too few points to resolve the square.")
         
-        # of shape (n,2)
+        # of shape (n,2), n = (math.ceil(a) * N - 2)**2
         return jnp.asarray(squareList)
 
 class RectangleBoundary():

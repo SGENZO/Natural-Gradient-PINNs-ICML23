@@ -6,10 +6,12 @@ import jax.numpy as jnp
 from jax import random
 
 # ------Code from Jax documentation-----
+# 输入m维，输出n维
 def random_layer_params(m, n, key, scale=1e-1):
   w_key, b_key = random.split(key)
   return scale * random.normal(w_key, (n, m)), scale * random.normal(b_key, (n,))
 
+# for example: sizes = [2, 32, 32, 32, 1]
 def init_params(sizes, key):
   keys = random.split(key, len(sizes))
   return [random_layer_params(m, n, k) for m, n, k in zip(sizes[:-1], sizes[1:], keys)]
